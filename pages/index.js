@@ -33,91 +33,58 @@ export default function Home() {
   };
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif", textAlign: "center" }}>
+    <div className="container">
       {/* Logo */}
       <div>
         <img
           src="https://bestwork.cl/wp-content/uploads/2023/05/Logo.png"
           alt="BestWork Logo"
-          style={{ maxWidth: "200px", marginBottom: "1rem" }}
+          className="logo"
         />
       </div>
 
       {/* Título */}
-      <h1 style={{ color: "#ff9900", fontSize: "1.8rem", marginBottom: "1rem" }}>
-        Revisa aquí el link del día
-      </h1>
-      <p style={{ color: "#666", fontSize: "1.2rem", marginBottom: "2rem" }}>
-        Si no encuentras tu link, ¡contáctanos!
-      </p>
+      <h1 className="title">Revisa aquí el link del día</h1>
+      <p className="subtitle">Si no encuentras tu link, ¡contáctanos!</p>
 
       {/* Formulario */}
-      <form onSubmit={buscarDatos} style={{ marginBottom: "2rem" }}>
+      <form onSubmit={buscarDatos} className="form">
         <input
           type="text"
           placeholder="Ingresa tu RUT (Ej: 12345678-9)"
           value={rut}
           onChange={(e) => setRut(e.target.value)}
-          style={{
-            padding: "0.5rem",
-            width: "300px",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-            marginRight: "1rem",
-          }}
+          className="input"
         />
-        <button
-          type="submit"
-          style={{
-            padding: "0.5rem 1rem",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
+        <button type="submit" className="button">
           {loading ? "Buscando..." : "Buscar"}
         </button>
       </form>
 
       {/* Mensaje de error */}
-      {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       {/* Tabla de Resultados */}
       {resultados.length > 0 && (
-        <table
-          style={{
-            width: "80%",
-            margin: "0 auto",
-            borderCollapse: "collapse",
-            backgroundColor: "#f9f9f9",
-            boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.1)",
-          }}
-        >
+        <table className="table">
           <thead>
-            <tr style={{ backgroundColor: "#007bff", color: "#fff" }}>
-              <th style={{ padding: "0.5rem" }}>Nombre</th>
-              <th style={{ padding: "0.5rem" }}>RUT</th>
-              <th style={{ padding: "0.5rem" }}>Fecha</th>
-              <th style={{ padding: "0.5rem" }}>Hora</th>
-              <th style={{ padding: "0.5rem" }}>Link Taller</th>
+            <tr>
+              <th>Nombre</th>
+              <th>RUT</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Link Taller</th>
             </tr>
           </thead>
           <tbody>
             {resultados.map((fila, index) => (
-              <tr key={index} style={{ borderBottom: "1px solid #ddd" }}>
-                <td style={{ padding: "0.5rem", textAlign: "center" }}>{fila[0]}</td>
-                <td style={{ padding: "0.5rem", textAlign: "center" }}>{fila[1]}</td>
-                <td style={{ padding: "0.5rem", textAlign: "center" }}>{fila[2]}</td>
-                <td style={{ padding: "0.5rem", textAlign: "center" }}>{fila[3]}</td>
-                <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                  <a
-                    href={fila[4]}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "#007bff", textDecoration: "none" }}
-                  >
+              <tr key={index}>
+                <td>{fila[0]}</td>
+                <td>{fila[1]}</td>
+                <td>{fila[2]}</td>
+                <td>{fila[3]}</td>
+                <td>
+                  <a href={fila[4]} target="_blank" rel="noopener noreferrer">
                     Ver Taller
                   </a>
                 </td>
@@ -126,6 +93,119 @@ export default function Home() {
           </tbody>
         </table>
       )}
+
+      {/* Estilos CSS dinámicos */}
+      <style jsx>{`
+        .container {
+          padding: 2rem;
+          font-family: Arial, sans-serif;
+          text-align: center;
+        }
+
+        .logo {
+          max-width: 200px;
+          margin-bottom: 1rem;
+        }
+
+        .title {
+          color: var(--primary-color);
+          font-size: 1.8rem;
+          margin-bottom: 1rem;
+        }
+
+        .subtitle {
+          color: var(--secondary-color);
+          font-size: 1.2rem;
+          margin-bottom: 2rem;
+        }
+
+        .form {
+          margin-bottom: 2rem;
+        }
+
+        .input {
+          padding: 0.5rem;
+          width: 300px;
+          border: 1px solid var(--border-color);
+          border-radius: 5px;
+          margin-right: 1rem;
+        }
+
+        .button {
+          padding: 0.5rem 1rem;
+          background-color: var(--button-bg);
+          color: var(--button-text);
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .error {
+          color: red;
+          margin-top: 1rem;
+        }
+
+        .table {
+          width: 80%;
+          margin: 0 auto;
+          border-collapse: collapse;
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th {
+          background-color: var(--table-header-bg);
+          color: var(--table-header-text);
+          padding: 0.5rem;
+        }
+
+        .table td {
+          padding: 0.5rem;
+          text-align: center;
+          border-bottom: 1px solid var(--table-border-color);
+        }
+
+        a {
+          color: var(--link-color);
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+        /* Variables para temas */
+        :root {
+          --primary-color: #ff9900;
+          --secondary-color: #666;
+          --border-color: #ccc;
+          --button-bg: #007bff;
+          --button-text: #fff;
+          --table-header-bg: #007bff;
+          --table-header-text: #fff;
+          --table-border-color: #ddd;
+          --link-color: #007bff;
+        }
+
+        /* Tema oscuro */
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --primary-color: #ffcc00;
+            --secondary-color: #bbb;
+            --border-color: #444;
+            --button-bg: #0056b3;
+            --button-text: #fff;
+            --table-header-bg: #0056b3;
+            --table-header-text: #fff;
+            --table-border-color: #555;
+            --link-color: #4da3ff;
+          }
+
+          body {
+            background-color: #121212;
+            color: #e0e0e0;
+          }
+        }
+      `}</style>
     </div>
   );
 }
