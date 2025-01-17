@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Configuración del cliente
+    // Configuración del cliente de Google
     const auth = new google.auth.JWT(
       process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       null,
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     // Leer datos desde Google Sheets
     const { data } = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEETS_ID,
-      range: "A1:F1000", // Ajustar el rango para incluir los datos relevantes
+      range: "A1:F1000", // Rango que incluye todas las columnas necesarias
     });
 
     const rows = data.values;
@@ -34,14 +34,14 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: "No se encontraron datos en la hoja." });
     }
 
-    // Buscar el RUT en la columna B (índice 1)
-    const resultado = rows.find((row) => row[1]?.trim().toLowerCase() === rut.trim().toLowerCase());
+    // Filtrar todas las filas que coincidan con el RUT
+    const resultados = rows.filter((row) => row[1]?.trim().toLowerCase() === rut.trim().toLowerCase());
 
-    if (!resultado) {
+    if (resultados.length === 0) {
       return res.status(404).json({ message: "No se encontraron datos para este RUT." });
     }
 
-    return res.status(200).json({ datos: resultado });
+    return res.status(200).json({ datos: resultados });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Error al buscar en Google Sheets." });

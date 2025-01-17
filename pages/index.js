@@ -24,7 +24,7 @@ export default function Home() {
       }
 
       const data = await response.json();
-      setResultados([data.datos]); // Adaptamos para que funcione con un único resultado
+      setResultados(data.datos); // Todas las coincidencias se guardan en `resultados`
     } catch (err) {
       setError(err.message);
     } finally {
