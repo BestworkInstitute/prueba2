@@ -100,6 +100,7 @@ export default function Home() {
           padding: 2rem;
           font-family: Arial, sans-serif;
           text-align: center;
+          background-color: #f7f8fa;
         }
 
         .logo {
@@ -108,13 +109,14 @@ export default function Home() {
         }
 
         .title {
-          color: var(--primary-color);
-          font-size: 1.8rem;
+          color: #ff6600;
+          font-size: 2rem;
           margin-bottom: 1rem;
+          font-weight: bold;
         }
 
         .subtitle {
-          color: var(--secondary-color);
+          color: #444;
           font-size: 1.2rem;
           margin-bottom: 2rem;
         }
@@ -124,24 +126,40 @@ export default function Home() {
         }
 
         .input {
-          padding: 0.5rem;
+          padding: 0.7rem;
           width: 300px;
-          border: 1px solid var(--border-color);
+          border: 1px solid #ddd;
           border-radius: 5px;
           margin-right: 1rem;
+          font-size: 1rem;
         }
 
         .button {
-          padding: 0.5rem 1rem;
-          background-color: var(--button-bg);
-          color: var(--button-text);
+          padding: 0.7rem 1.5rem;
+          background-color: #007bff;
+          color: #fff;
           border: none;
           border-radius: 5px;
           cursor: pointer;
+          font-size: 1rem;
+          font-weight: bold;
+          box-shadow: 0px 4px 6px rgba(0, 123, 255, 0.3);
+          transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+          background-color: #0056b3;
+          transform: translateY(-2px);
+        }
+
+        .button:active {
+          background-color: #004080;
+          transform: translateY(0);
         }
 
         .error {
-          color: red;
+          color: #ff0000;
+          font-size: 1rem;
           margin-top: 1rem;
         }
 
@@ -149,23 +167,29 @@ export default function Home() {
           width: 80%;
           margin: 0 auto;
           border-collapse: collapse;
-          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+          background-color: #fff;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .table th {
-          background-color: var(--table-header-bg);
-          color: var(--table-header-text);
-          padding: 0.5rem;
+          background-color: #007bff;
+          color: #fff;
+          padding: 1rem;
+          font-size: 1rem;
+          text-align: center;
         }
 
         .table td {
-          padding: 0.5rem;
+          padding: 0.8rem;
           text-align: center;
-          border-bottom: 1px solid var(--table-border-color);
+          border-bottom: 1px solid #ddd;
         }
 
         a {
-          color: var(--link-color);
+          color: #007bff;
+          font-weight: bold;
           text-decoration: none;
         }
 
@@ -173,36 +197,42 @@ export default function Home() {
           text-decoration: underline;
         }
 
-        /* Variables para temas */
-        :root {
-          --primary-color: #ff9900;
-          --secondary-color: #666;
-          --border-color: #ccc;
-          --button-bg: #007bff;
-          --button-text: #fff;
-          --table-header-bg: #007bff;
-          --table-header-text: #fff;
-          --table-border-color: #ddd;
-          --link-color: #007bff;
-        }
-
-        /* Tema oscuro */
+        /* Modo oscuro */
         @media (prefers-color-scheme: dark) {
-          :root {
-            --primary-color: #ffcc00;
-            --secondary-color: #bbb;
-            --border-color: #444;
-            --button-bg: #0056b3;
-            --button-text: #fff;
-            --table-header-bg: #0056b3;
-            --table-header-text: #fff;
-            --table-border-color: #555;
-            --link-color: #4da3ff;
-          }
-
-          body {
+          .container {
             background-color: #121212;
             color: #e0e0e0;
+          }
+
+          .input {
+            border: 1px solid #555;
+            background-color: #222;
+            color: #e0e0e0;
+          }
+
+          .table {
+            background-color: #222;
+            color: #e0e0e0;
+          }
+
+          .table th {
+            background-color: #333;
+          }
+
+          .table td {
+            border-bottom: 1px solid #444;
+          }
+
+          a {
+            color: #4da3ff;
+          }
+
+          .button {
+            background-color: #0056b3;
+          }
+
+          .button:hover {
+            background-color: #004080;
           }
         }
       `}</style>
